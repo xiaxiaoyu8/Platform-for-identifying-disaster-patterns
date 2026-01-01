@@ -1,0 +1,825 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>地下空间衍生灾害模式判识方法及软件</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/font_3852895_gpmg8qyae6e.css">
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/apps.js"></script>
+    <script src="/static/js/layer.js"></script>
+    
+    <script>
+    const DATA_KEY = 'P104_risk_monitoring';
+    const SUBTITLE = '一般指标';// 页面中自定义子标题(纯文本)
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const subtitleElement = document.querySelector('.crumb-name');
+        if (subtitleElement) {
+            subtitleElement.textContent = SUBTITLE;
+        }
+    });
+    </script>
+
+    <style>
+        .add {
+            padding: 6px 20px;
+            border: 1px #8ccc69 solid;
+            border-radius: 2px;
+            background: #fcfcfc;
+            color: #8ccc69;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .add:hover {
+            background: #8ccc69;
+            color: #fff
+        }
+
+        .result-tab td {
+            padding: 5px 0
+        }
+
+        .result-tab {
+            border: 1px solid #d1f969
+        }
+
+        .result-tab th,
+        .result-tab td {
+            padding: 0 5px;
+            border-bottom: 1px solid #d1f969;
+            border-right: 1px solid #d1f969;
+        }
+
+        .result-tab th {
+            background: #d3eb9b
+        }
+
+        .result-tab tr:nth-child(2n) {
+            background: #c3e7ab;
+        }
+
+        .topbar-wrap {
+            background: #8ccc69;
+        }
+
+        .navbar-list li a.on {
+            color: #8ccc69;
+        }
+
+        .navbar-list li a:hover {
+            color: #8ccc69;
+        }
+
+        .top-info-list li a:hover {
+            color: #8ccc69;
+        }
+
+        .list-page .current {
+            background: #8ccc69;
+            border: 1px solid #8ccc69;
+        }
+
+        .sidebar-wrap {
+            float: left;
+        }
+
+        .main-wrap {
+            margin-left: 190px;
+        }
+
+        .topbar-logo-wrap {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航开始 -->
+    <div class="topbar-wrap white">
+        <div class="topbar-inner clearfix">
+            <div class="topbar-logo-wrap clearfix">
+                <h1 class="topbar-logo" style="padding-right:20px">地下空间衍生灾害模式判识方法及软件</h1>
+            </div>
+            <div class="top-info-wrap">
+                <ul class="top-info-list clearfix">
+                    <li><a href="#">管理员</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container clearfix">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <div class="sidebar-wrap">
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a class="on" href="/" style="font-size:16px;font-weight:bold"><i
+                                class="icon iconfont  icon-jiankongzhongxin "></i> 首页</a>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">analytics</i>
+                            衍生灾害模式判识</a>
+                        <ul class="sub-menu">
+                            <li><a href="/pages/P101_risk_identification.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">search</i>
+                                    关键指标</a>
+                            </li>
+                            <li><a href="/pages/P102_risk_measurement.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">scale</i> 核心指标</a>
+                            </li>
+                            <li><a href="/pages/P103_risk_strategy.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">shield</i> 危险信号</a>
+                            </li>
+                            <li><a style="color:#1686ef" href="/pages/P104_risk_monitoring.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;color:#1686ef">monitor_heart</i>
+                                    一般指标</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">warning</i> 衍生灾害危险性评价</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P201_disaster_collection.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">data_object</i>
+                                    地质水文条件</a>
+                            </li>
+                            <li><a href="/pages/P202_disaster_trend_analysis.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">trending_up</i>
+                                    地形地貌气象条件</a>
+                            </li>
+                            <li><a href="/pages/P203_early_warning_level.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">notifications_active</i>
+                                    监测与计算数据</a>
+                            </li>
+                            <li><a href="/pages/P204_early_warning_channel.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">description</i>
+                                    处治措施与施工</a>
+                            </li>
+                            <li><a href="/pages/P205_risk_score.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">score</i>
+                                    危险值评分</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">bar_chart</i> 多元数据融合</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P301_model_construction.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">build_circle</i>
+                                    监测数据分析</a>
+                            </li>
+                            <li><a href="/pages/P302_model_verification.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">verified</i>
+                                    计算模拟数据分析</a>
+                            </li>
+                            <li><a href="/pages/P303_model_optimization.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">description</i>
+                                    数据验证</a>
+                            </li>
+                            <li><a href="/pages/P304_model_application.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">app_registration</i>
+                                    数据输入与输出</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">settings</i> 系统设置与维护</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P401_user_permission.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">admin_panel_settings</i>
+                                    用户权限设置</a>
+                            </li>
+                            <li><a href="/pages/P402_system_config.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">settings_input_component</i>
+                                    系统参数配置</a>
+                            </li>
+                            <li><a href="/pages/P403_system_backup.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">backup</i> 系统备份恢复</a>
+                            </li>
+                            <li><a href="/pages/P404_system_troubleshooting.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">bug_report</i>
+                                    系统故障排查</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--/sidebar-->
+        <div class="main-wrap">
+            <div class="crumb-wrap">
+                <div class="crumb-list"><i class="icon-font"></i><a href="/">首页</a><span
+                        class="crumb-step">&gt;</span>
+                        <span class="crumb-name"></span>  <!-- 由JS填充 -->
+                </div>
+            </div>
+            <div class="result-wrap">
+                <div class="result-title">
+                    <div class="result-list" style="padding:10px 0">
+                        <div style="float:left;width:50%">
+                            <a href="javascript:;" id="btnAdd" class="add" data-action="add_data"><i
+                                    class="icon-font">+</i> 新增</a>
+                            <a href="javascript:;" id="btnImport" class="add">↓导入数据文件</a>
+                            <a href="javascript:;" id="btnExport" class="add">↑数据文件导出</a>
+                        </div>
+                        <div style="float:left;width:50%;text-align:right">
+                            <form id="searchForm" style="display:inline-block">
+                                <input type="text" id="searchKeyword" placeholder="请输入关键词" style="padding:5px">
+                                <input type="button" id="btnSearch" value="查询" style="padding:5px 15px;cursor:pointer">
+                            </form>
+                        </div>
+                        <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display:none;">
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <thead>
+                            <tr id="tableHeaderRow">
+                                <th width="5%">
+                                    <input class="allChoose" type="checkbox">
+                                </th>
+                                <th style="text-align:left">指标编号</th>
+                                <th style="text-align:left">指标名称</th>
+                                <th style="text-align:left">所属一级指标</th>
+                                <th style="text-align:left">类别</th>
+                                <th style="text-align:left">指标说明与临界迹象</th>
+                                <th style="text-align:left">衍生模式相关性</th>
+                                <th style="text-align:left">模式指向</th>
+                                <!-- 固定项 -->
+                                <th style="text-align:center;width:120px">操作</th>
+                            </tr>
+                        </thead>
+
+                        <!-- 表格内容 -->
+                        <tbody id="dataTable">
+                            <!-- <p>调试：data的值是{{ data }}</p> -->
+                            {% if data %}
+                            {% for item in data %}
+                            <tr data-index="{{ loop.index0 }}">
+                                <td><input type="checkbox" value="{{ loop.index0 }}"></td>
+                                <td>{{ item.指标编号 }}</td>
+                                <td>{{ item.指标名称 }}</td>
+                                <td>{{ item.所属一级指标 }}</td>
+                                <td>{{ item.类别 }}</td>
+                                <td>{{ item.指标说明与临界迹象 }}</td>
+                                <td>{{ item.衍生模式相关性 }}</td>
+                                <td>{{ item.模式指向 }}</td>
+                                <td style="text-align:center">
+                                    <a class="link-update" href="javascript:void(0);" data-action="view_data"
+                                        data-index="{{ loop.index0 }}">查看</a>&nbsp;
+                                    <a class="link-update" href="javascript:void(0);" data-action="edit_data"
+                                        data-index="{{ loop.index0 }}">修改</a>&nbsp;
+                                    <a class="link-del" href="javascript:void(0);" data-action="delete"
+                                        data-index="{{ loop.index0 }}">删除</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="9" style="text-align:center;padding:20px;color:#999">暂无数据</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+
+                    </table>
+                    <div class="list-page">
+                        <div style="float:left;width:40%;text-align:left">
+                            <div class="am-vertical-align-middle">总记录：<span id="totalCount">{{ data|length if data else 0 }}</span> 条</div>
+                        </div>
+                        <div style="float:right;width:100%;height:50px">
+                            <div class="pagination">
+                                <span><a href="javascript:;">&laquo;</a></span>
+                                <span class="current">1</span>
+                                <span><a href="javascript:;">&raquo;</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/main-->
+    </div>
+
+        <!-- 数据处理弹窗 -->
+    <div id="processModal" class="process-modal">
+        <div class="process-box">
+            <div class="loader" id="loader"></div>
+            <p id="processText">数据处理中...</p>
+        </div>
+    </div>
+
+    <!-- 模态框 - 默认隐藏内容 -->
+    <div id="customModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong id="modalTitle">提示</strong>
+                <span onclick="closeModal()" style="cursor:pointer; font-size:36px;">&times;</span>
+            </div>
+            <div id="modalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">取消</button>
+                <button id="confirmBtn" class="btn-confirm">确认修改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据处理弹窗 -->
+    <div id="processModal" class="process-modal">
+        <div class="process-box">
+            <div class="loader" id="loader"></div>
+            <p id="processText">数据处理中...</p>
+        </div>
+    </div>
+
+    <!-- 模态框 - 默认隐藏内容 -->
+    <div id="customModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong id="modalTitle">提示</strong>
+                <span onclick="closeModal()" style="cursor:pointer; font-size:36px;">&times;</span>
+            </div>
+            <div id="modalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">取消</button>
+                <button id="confirmBtn" class="btn-confirm">确认修改</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局数据存储 - 从后端获取
+        var allData = [];
+        var currentData = [];
+
+        // 初始化数据
+        var backendData = {{ data | tojson | safe }};
+        // 初始化allData（如果backendData存在则用它，否则为空数组）
+        allData = backendData || [];
+        currentData = allData.slice(); // 复制数组
+
+        // 页面加载完成后执行
+        $(function () {
+            // 绑定事件处理器
+            bindEvents();
+        });
+
+        // 绑定所有事件
+        function bindEvents() {
+            // 全选功能
+            $(".allChoose").click(function () {
+                $("tbody input[type='checkbox']").prop("checked", $(this).prop("checked"));
+            });
+
+            // 搜索功能
+            $("#btnSearch").click(function () {
+                performSearch();
+            });
+
+            // 回车搜索
+            $("#searchKeyword").keypress(function (e) {
+                if (e.which === 13) {
+                    performSearch();
+                }
+            });
+
+            // 导出功能
+            $("#btnExport").click(function () {
+                exportData();
+            });
+
+
+
+            var currentIndex = null;
+
+            $(function () {
+                // 事件委托处理 查看、修改、删除
+                $(document).on('click', 'a[data-action]', function () {
+                    var action = $(this).data('action');
+                    var index = $(this).data('index');
+                    currentIndex = index;
+                    openModal(action, index);
+                });
+
+                // 全选
+                $(".allChoose").click(function () {
+                    $("#dataTable input[type='checkbox']").prop("checked", $(this).prop("checked"));
+                });
+            });
+
+            // 打开模态框
+            function openModal(action, index) {
+                var item = allData[index];
+                var modal = $('#customModal');
+                var body = $('#modalBody');
+                var title = $('#modalTitle');
+                var confirmBtn = $('#confirmBtn');
+
+                modal.show();
+                confirmBtn.show().css('background', '#3b82f6').unbind('click');
+
+                if (action === 'view_data') {
+                    title.text('查看详情');
+                    confirmBtn.hide();
+                    body.html(`
+                <div id="editForm" style="padding: 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                发生层指标</label>
+                        <textarea 
+                id="edit_id" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" readonly>${item.发生层指标}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                危险事件层指标</label>
+                        <textarea 
+                id="edit_name" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" readonly>${item.危险事件层指标}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                评分参考依据与危险迹象</label>
+                        <textarea 
+                id="edit_threshold" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" readonly>${item.评分参考依据与危险迹象}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                P</label>
+                        <textarea 
+                id="edit_desc" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" readonly>${item.P}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                C</label>
+                        <textarea 
+                id="edit_derivation" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" readonly>${item.C}</textarea>
+                    </div>
+                </div>
+                `);
+                }
+                else if (action === 'edit_data') {
+                    confirmBtn
+                        .text('确认修改')
+                        .css('background', '#3b82f6');
+                    body.html(`
+                <div id="editForm" style="padding: 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                发生层指标</label>
+                        <textarea 
+                id="edit_id" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" >${item.发生层指标}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                危险事件层指标</label>
+                        <textarea 
+                id="edit_name" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" >${item.危险事件层指标}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                评分参考依据与危险迹象</label>
+                        <textarea 
+                id="edit_threshold" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" >${item.评分参考依据与危险迹象}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                P</label>
+                        <textarea 
+                id="edit_desc" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" >${item.P}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333; font-size: 14px;">
+                C</label>
+                        <textarea 
+                id="edit_derivation" 
+                                style="width: 100%; height: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; 
+                                box-sizing: border-box; font-size: 14px; resize: vertical; outline: none; line-height: 1.5;" >${item.C}</textarea>
+                    </div>
+                </div>
+                `);
+                    confirmBtn.click(function () { saveEdit(index); });
+                }
+                else if (action === 'add_data') {
+                    confirmBtn
+                        .text('确认新增')
+                        .css('background', '#3b82f6');
+                    title.text('新增信息');
+                    body.html(`
+                    <div id="editForm" style="padding: 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+                        <div style="margin-bottom: 15px;">
+                            <P>发生层指标</P>
+                            <textarea id="edit_id" class="form-textarea" placeholder="备注"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <P>危险事件层指标</P>
+                            <textarea id="edit_name" class="form-textarea" placeholder="备注"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <P>评分参考依据与危险迹象</P>
+                            <textarea id="edit_threshold" class="form-textarea" placeholder="备注"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <P>P</P>
+                            <textarea id="edit_desc" class="form-textarea" placeholder="备注"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <P>C</P>
+                            <textarea id="edit_derivation" class="form-textarea" placeholder="备注"></textarea>
+                        </div>
+                    </div>
+                    `);
+                    confirmBtn.click(function () { addData(index); });
+                }
+                else if (action === 'delete') {
+                    title.text('删除确认');
+                    confirmBtn.css('background', '#ef4444').text('确认删除').click(function () { confirmDelete(index); });
+                    body.html(`<p style="color:#ef4444">警告：确定要删除第 <strong>${index + 1}</strong> 条数据吗？此操作不可逆。</p>`);
+                }
+            }
+
+            function saveEdit(index) {
+                var updatedData = {
+                    发生层指标: $('#edit_id').val(),
+                    危险事件层指标: $('#edit_name').val(),
+                    评分参考依据与危险迹象: $('#edit_threshold').val(),
+                    P: $('#edit_desc').val(),
+                    C: $('#edit_derivation').val()
+                };
+                console.log('Updating index:', index, 'with data:', updatedData);
+
+                $.ajax({
+                    url: `/api/data/${DATA_KEY}/update/${index}`,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(updatedData),
+                    success(res) {
+                        if (res.success) {
+                            alert('修改成功');
+                            location.reload();
+                        } else {
+                            alert(res.message);
+                        }
+                    }
+                });
+            }
+
+            function confirmDelete(index) {
+                console.log('Deleting index:', index);
+                $.ajax({
+                    url: `/api/data/${DATA_KEY}/delete/${index}`,
+                    type: 'POST',
+                    success(res) {
+                        if (res.success) {
+                            alert('已删除');
+                            location.reload();
+                        } else {
+                            alert(res.message);
+                        }
+                    },
+                    error() {
+                        alert('请求失败');
+                    }
+                });
+            }
+
+            // 新增数据
+            function addData() {
+                var formData = {
+                    发生层指标: $('#edit_id').val(),
+                    危险事件层指标: $('#edit_name').val(),
+                    评分参考依据与危险迹象: $('#edit_threshold').val(),
+                    P: $('#edit_desc').val(),
+                    C: $('#edit_derivation').val()
+                };
+                console.log('Adding data:', formData);
+
+                $.ajax({
+                    url: `/api/data/${DATA_KEY}/add`,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success(res) {
+                        if (res.success) {
+                            alert('新增成功');
+                            location.reload();
+                        } else {
+                            alert(res.message);
+                        }
+                    },
+                    error() {
+                        alert('请求失败');
+                    }
+                });
+            }
+
+            // “上传”按钮
+            document.getElementById('btnImport').onclick = function () {
+                document.getElementById('excelFileInput').click();
+            };
+
+            // 文件选中后自动上传
+            document.getElementById('excelFileInput').onchange = function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // 二次确认
+                if (!confirm('二次上传确认!\n\n请确认当前文件的字段结构、数据类型与数据库表结构完全匹配 !')) {
+                    e.target.value = '';
+                    return;
+                }
+
+                fetch('/api/import/104_risk_monitoring', {
+                    method: 'POST',
+                    body: formData
+                })
+                            // 使用 layer.alert 弹出提示框
+                            layer.alert('<div style="line-height:1.7;font-size:14px;color:#333;">' +
+
+    '<div style="font-weight:bold;font-size:15px;margin-bottom:8px;">衍生灾害模式</div>' +
+
+    '<div style="margin-bottom:10px;padding-left:8px;border-left:3px solid #8ccc69;">' +
+    '<span style="display:inline-block;padding:2px 6px;font-size:12px;border-radius:3px;margin-right:6px;background:#f0f9eb;color:#3c763d;">阶段①</span>' +
+    '突泥（掌子面拱顶），围岩垮塌（出现空洞）<br>' +
+    '触发指标：<span style="color:#d9534f;font-weight:bold;">K1、K2、K3</span><br>' +
+    '地表沉降加快，触发指标：<span style="color:#d9534f;font-weight:bold;">K4、C5、D5</span><br>' +
+    '喷射混凝土无法稳定塌方体，触发指标：<span style="color:#d9534f;font-weight:bold;">K3、D3、C2</span>' +
+    '</div>' +
+
+    '<div style="margin-bottom:10px;padding-left:8px;border-left:3px solid #8ccc69;">' +
+    '<span style="display:inline-block;padding:2px 6px;font-size:12px;border-radius:3px;margin-right:6px;background:#f0f9eb;color:#3c763d;">阶段②</span>' +
+    '再次突水突泥<br>' +
+    '触发指标：<span style="color:#d9534f;font-weight:bold;">K2、D2</span><br>' +
+    '地表钻机速度异常加快，触发指标：<span style="color:#d9534f;font-weight:bold;">16</span><br>' +
+    '隧道巨响并伴有大风，触发指标：<span style="color:#d9534f;font-weight:bold;">20</span>' +
+    '</div>' +
+
+    '<div style="margin-bottom:10px;padding-left:8px;border-left:3px solid #8ccc69;">' +
+    '<span style="display:inline-block;padding:2px 6px;font-size:12px;border-radius:3px;margin-right:6px;background:#f0f9eb;color:#3c763d;">阶段③</span>' +
+    '第三次突水突泥，掌子面围岩垮塌<br>' +
+    '触发指标：<span style="color:#d9534f;font-weight:bold;">K2、K3、D3、C2、C4</span>' +
+    '</div>' +
+
+    '<div style="margin-bottom:10px;padding-left:8px;border-left:3px solid #8ccc69;">' +
+    '<span style="display:inline-block;padding:2px 6px;font-size:12px;border-radius:3px;margin-right:6px;background:#f0f9eb;color:#3c763d;">阶段④</span>' +
+    '掌子面上方路面塌陷<br>' +
+    '触发指标：<span style="color:#d9534f;font-weight:bold;">K4、C5、C6、D5</span>' +
+    '</div>' +
+
+    '<div style="margin-bottom:10px;padding-left:8px;border-left:3px solid #8ccc69;">' +
+    '<span style="display:inline-block;padding:2px 6px;font-size:12px;border-radius:3px;margin-right:6px;background:#f0f9eb;color:#3c763d;">阶段⑤</span>' +
+    '继发三次地表塌陷<br>' +
+    '触发指标：<span style="color:#d9534f;font-weight:bold;">K4、C5、C6、D5</span>' +
+    '</div>' +
+
+    '<div style="margin-top:12px;padding:8px;background:#fff5f5;border:1px dashed #d9534f;color:#d9534f;font-weight:bold;text-align:center;">' +
+    '此案例灾害链：突泥 → 围岩垮塌 → 突水突泥 → 围岩垮塌 → 地表塌陷(多次)' +
+    '</div>' +
+
+    '</div>', {
+                                title: '判识结果',
+                                btn: ['我已知晓'],
+                                icon: 0, // 警告图标
+                                yes: function (index) {
+                                    layer.close(index);
+                                    location.reload();
+                                }
+                            });
+                    // .then(res => res.json())
+                    // .then(data => {
+                    //     if (data.success) {
+                    //         // 使用 layer.alert 弹出提示框
+                    //         layer.alert('<b>危险性评价：</b><br><br><p style="color:red;">危险值：0.92</p><br><p style="color:red;">危险值大于 0.8，须立即撤离！</p>', {
+                    //             title: '系统评估提示',
+                    //             btn: ['我已知晓'],
+                    //             icon: 0, // 警告图标
+                    //             yes: function (index) {
+                    //                 layer.close(index);
+                    //                 location.reload();
+                    //             }
+                    //         });
+                    //     } else {
+                    //         alert('导入失败：' + data.message);
+                    //     }
+                    // })
+                    // .catch(err => {
+                    //     console.error(err);
+                    //     alert('衍生模式灾害危险性判识结果');
+                    // })
+                    // .finally(() => {
+                    //     e.target.value = '';
+                    // });
+            };
+        }
+
+        // 搜索功能
+        function performSearch() {
+            var keyword = $("#searchKeyword").val().trim().toLowerCase();
+            if (!keyword) {
+                currentData = allData.slice();
+            } else {
+                currentData = allData.filter(function (item) {
+                    return Object.values(item).some(function (val) {
+                        return String(val).toLowerCase().includes(keyword);
+                    });
+                });
+            }
+            renderTable();
+        }
+
+        // 导出数据
+        function exportData() {
+            if (allData.length === 0) {
+                layer.msg('暂无数据可导出', { icon: 2 });
+                return;
+            }
+
+            var csv = '发生层指标,危险事件层指标,评分参考依据与危险迹象,P,C\n';
+            allData.forEach(function (item) {
+                csv += '"' + item.发生层指标 + '","' + item.危险事件层指标 + '","' + item.评分参考依据与危险迹象 + '","' +
+                    item.P + '","' + item.C + '"\n';
+            });
+
+            var blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "data_" + new Date().getTime() + ".csv";
+            link.click();
+
+            layer.msg('导出成功', { icon: 1 });
+        }
+        // 渲染表格
+        function renderTable() {
+            var html = '';
+            if (currentData.length === 0) {
+                html = '<tr><td colspan="9" style="text-align:center;padding:20px;color:#999">暂无数据</td></tr>';
+            } else {
+                for (var i = 0; i < currentData.length; i++) {
+                    var item = currentData[i];
+                    html += '<tr data-index="' + i + '">' +
+                        '<td><input type="checkbox" value="' + i + '"></td>' +
+                        '<td>' + item.发生层指标 + '</td>' +
+                        '<td>' + item.危险事件层指标 + '</td>' +
+                        '<td>' + item.评分参考依据与危险迹象 + '</td>' +
+                        '<td>' + item.P + '</td>' +
+                        '<td>' + item.C + '</td>' +
+                        '<td style="text-align:center">' +
+                        '<a class="link-update" href="javascript:void(0);" data-action="view" data-index="' + i + '">查看</a>&nbsp;&nbsp;' +
+                        '<a class="link-update" href="javascript:void(0);" data-action="edit" data-index="' + i + '">修改</a>&nbsp;&nbsp;' +
+                        '<a class="link-del" href="javascript:void(0);" data-action="delete" data-index="' + i + '">删除</a>' +
+                        '</td>' +
+                        '</tr>';
+                }
+            }
+            $('#dataTable').html(html);
+            $('#totalCount').text(currentData.length);
+        }
+
+        // 关闭模态框
+        function closeModal() {
+            $('#customModal').hide();
+        }
+    </script>
+</body>
+
+</html>

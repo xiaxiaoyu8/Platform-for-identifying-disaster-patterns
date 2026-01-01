@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>地下空间衍生灾害模式判识方法及软件</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/font_3852895_gpmg8qyae6e.css">
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/apps.js"></script>
+</head>
+
+<body>
+    <style>
+        .topbar-wrap {
+            background: #8ccc69;
+        }
+
+        .navbar-list li a.on {
+            color: #8ccc69;
+        }
+
+        .navbar-list li a:hover {
+            color: #8ccc69;
+        }
+
+        .top-info-list li a:hover {
+            color: #8ccc69;
+        }
+
+        .list-page .current {
+            background: #8ccc69;
+            border: 1px solid #8ccc69;
+        }
+
+        .sidebar-wrap {
+            float: left;
+        }
+
+        .main-wrap {
+            margin-left: 190px;
+        }
+
+        .topbar-logo-wrap {
+            float: left;
+        }
+    </style>
+    <div class="topbar-wrap white">
+        <div class="topbar-inner clearfix">
+            <div class="topbar-logo-wrap clearfix">
+                <h1 class="topbar-logo" style="padding-right:20px">地下空间衍生灾害模式判识方法及软件</h1>
+
+            </div>
+            <div class="top-info-wrap">
+                <ul class="top-info-list clearfix">
+                    <!-- <li><a href="/web/my/">管理员</a></li>
+                    <li><a href="/web/login/out">退出</a></li> -->
+                    <li><a href="#">管理员</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container clearfix">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <div class="sidebar-wrap">
+            <!--div class="sidebar-title">
+            <h1>菜单</h1>
+        </div-->
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a class="on" href="/"
+                            style="font-size:16px;font-weight:bold"><i
+                                class="icon iconfont  icon-jiankongzhongxin "></i> 首页</a>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">analytics</i> 
+                                        衍生灾害模式判识</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P101_risk_identification.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">search</i> 
+                                        关键指标</a>
+                            </li>
+                            <li><a href="/pages/P102_risk_measurement.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">scale</i> 
+                                        核心指标</a>
+                            </li>
+                            <li><a href="/pages/P103_risk_strategy.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">shield</i> 
+                                        危险信号</a>
+                            </li>
+                            <li><a href="/pages/P104_risk_monitoring.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">monitor_heart</i>
+                                    一般指标</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">warning</i> 衍生灾害危险性评价</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P201_disaster_collection.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">data_object</i>
+                                    地质水文条件</a>
+                            </li>
+                            <li><a href="/pages/P202_disaster_trend_analysis.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">trending_up</i>
+                                    地形地貌气象条件</a>
+                            </li>
+                            <li><a href="/pages/P203_early_warning_level.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">notifications_active</i>
+                                    监测与计算数据</a>
+                            </li>
+                            <li><a href="/pages/P204_early_warning_channel.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">description</i>
+                                    处治措施与施工</a>
+                            </li>
+                            <li><a href="/pages/P205_risk_score.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">score</i>
+                                    危险值评分</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">bar_chart</i> 
+                                多元数据融合</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P301_model_construction.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">build_circle</i>
+                                    监测数据分析</a>
+                            </li>
+                            <li><a href="/pages/P302_model_verification.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">verified</i> 
+                                    计算模拟数据分析</a>
+                            </li>
+                            <li><a href="/pages/P303_model_optimization.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">description</i>
+                                    数据验证</a>
+                            </li>
+                            <li><a href="/pages/P304_model_application.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">app_registration</i>
+                                    数据输入与输出</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="font-size:16px;font-weight:bold"><i class="icon material-symbols-outlined"
+                                style="font-size:18px;width:18px;vertical-align:text-bottom">settings</i> 系统设置与维护</a>
+                        <ul class="sub-menu" style="display:none">
+                            <li><a href="/pages/P401_user_permission.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">admin_panel_settings</i>
+                                    用户权限设置</a>
+                            </li>
+                            <li><a href="/pages/P402_system_config.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">settings_input_component</i>
+                                    系统参数配置</a>
+                            </li>
+                            <li><a href="/pages/P403_system_backup.html"><i class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">backup</i>
+                                        系统备份恢复</a>
+                            </li>
+                            <li><a href="/pages/P404_system_troubleshooting.html"><i
+                                        class="icon material-symbols-outlined"
+                                        style="font-size:18px;width:18px;vertical-align:middle;">bug_report</i>
+                                    系统故障排查</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--/sidebar-->
+        <div class="main-wrap">
+            <div class="crumb-wrap">
+                <div class="crumb-list"><i class="icon-font">🔈</i><span>欢迎使用 地下空间衍生灾害模式判识方法及软件。</span></div>
+            </div>
+            <!--div class="result-wrap">
+            <div class="result-title">
+                <h1>快捷操作</h1>
+            </div>
+            <div class="result-content">
+                <div class="short-wrap">
+                    <a href=""><i class="icon-font">&#xe001;</i>新增</a>
+                </div>
+            </div>
+        </div-->
+            <div class="result-wrap">
+                <div class="result-title">
+                    <h1>系统基本信息</h1>
+                </div>
+                <div class="result-content">
+                    <ul class="sys-info-list">
+                        <li>
+                            <label class="res-lab">系统名称</label><span class="res-info">地下空间衍生灾害模式判识方法及软件</span>
+                        </li>
+                        <li>
+                            <label class="res-lab">技术架构</label><span
+                                class="res-info">HTML, CSS, JavaScript, Python(Flask), JSON/FileStorage</span>
+                        </li>
+                        <li>
+                            <label class="res-lab">系统主要功能</label><span class="res-info">
+                                该平台具备地下空间突水突泥、围岩垮塌、地表塌陷衍生灾害模式指标自动匹配、衍生模式智能判识功能，
+                                并可进行风险识别和风险度量。灾害监测预警方面，能采集灾害数据、分析趋势。
+                                数据模型分析模块可构建、验证、优化模型，明确应用场景。系统设置与维护可进行用户权限设置、参数配置、备份恢复及故障排查，
+                                为地下衍生灾害防控提供全面支持。</span>
+                        </li>
+                        <li>
+                            <label class="res-lab">数据配置</label><span class="res-info">配置驱动架构，所有业务内容均可通过本地数据文件动态定义。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!--/main-->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>新增风险识别</title>
+</head>
+<body>
+
+<h2>新增风险识别</h2>
+
+<form method="post" action="/risk/identification/save">
+
+    <label>标题：</label>
+    <input type="text" name="title" required><br><br>
+
+    <label>风险来源：</label>
+    <input type="text" name="source" required><br><br>
+
+    <label>风险类别：</label>
+    <input type="text" name="category" required><br><br>
+
+    <label>风险描述：</label>
+    <textarea name="description" required></textarea><br><br>
+
+    <label>风险等级：</label>
+    <select name="level">
+        <option value="低">低</option>
+        <option value="中">中</option>
+        <option value="高">高</option>
+    </select><br><br>
+
+    <label>识别方法：</label>
+    <input type="text" name="method"><br><br>
+
+    <label>识别人员：</label>
+    <input type="text" name="person"><br><br>
+
+    <button type="submit">保存</button>
+    <a href="/risk/identification">返回</a>
+
+</form>
+
+</body>
+</html>
